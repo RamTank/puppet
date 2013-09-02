@@ -3,10 +3,10 @@
 
 . /lib/svc/share/smf_include.sh
 
-prefix=/opt/csw
-exec_prefix=/opt/csw
-sysconfdir=/opt/csw/etc
-sbindir=/opt/csw/sbin
+prefix=/opt/puppet
+exec_prefix=$prefix
+sysconfdir=$prefix/etc
+sbindir=$prefix/sbin
 
 pidfile=/var/lib/puppet/run/master.pid
 
@@ -17,7 +17,7 @@ start)
 
     printf "Starting Puppet server services:"
 
-    /opt/csw/sbin/puppetmasterd
+    $sbindir/puppetmasterd
 
     printf " puppetmaster"
     echo ""
