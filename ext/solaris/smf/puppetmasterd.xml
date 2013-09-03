@@ -45,20 +45,25 @@
     <exec_method
         type='method'
         name='start'
-        exec='/opt/csw/lib/svc/method/svc-puppetmasterd start'
+        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd start'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='stop'
-        exec='/opt/csw/lib/svc/method/svc-puppetmasterd stop'
+        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd stop'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='refresh'
-        exec='/opt/csw/lib/svc/method/svc-puppetmasterd reload'
+        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd reload'
         timeout_seconds='60' />
+
+		<property_group name='startd' type='framework'>
+		    <propval name='duration' type='astring' value='transient' />
+		</property_group>
+
 
     <stability value='Unstable' />
 
@@ -72,6 +77,8 @@
                 uri='http://www.reductivelabs.com/projects/puppet' />
         </documentation>
     </template>
+
+
 </service>
 
 </service_bundle>
