@@ -4,10 +4,8 @@
 . /lib/svc/share/smf_include.sh
 . /etc/profile
 
-prefix=/opt/puppet
-exec_prefix=$prefix
-sysconfdir=$prefix/etc
-bindir=$prefix/bin
+prefix=/opt/local
+exec_prefix=${prefix}/bin
 fullcat=/opt/local/bin/cat
 
 pidfile=/var/lib/puppet/run/master.pid
@@ -19,7 +17,7 @@ start)
 
     printf "Starting Puppet server services:"
 
-    puppet master --daemonize 
+    ${exec_prefix}/puppet master --daemonize 
 
     printf " puppet master"
     echo ""

@@ -45,19 +45,19 @@
     <exec_method
         type='method'
         name='start'
-        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd start'
+        exec='/opt/local/lib/svc/method/svc-puppetmasterd start'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='stop'
-        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd stop'
+        exec='/opt/local/lib/svc/method/svc-puppetmasterd stop'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='refresh'
-        exec='/opt/puppet/ext/solaris/smf/svc-puppetmasterd reload'
+        exec='/opt/local/lib/svc/method/svc-puppetmasterd reload'
         timeout_seconds='60' />
 
 		<property_group name='startd' type='framework'>
