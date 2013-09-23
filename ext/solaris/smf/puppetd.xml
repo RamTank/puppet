@@ -45,19 +45,19 @@
     <exec_method
         type='method'
         name='start'
-        exec='/opt/csw/lib/svc/method/svc-puppetd start'
+        exec='/opt/local/lib/svc/method/svc-puppetd start'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='stop'
-        exec='/opt/csw/lib/svc/method/svc-puppetd stop'
+        exec='/opt/local/lib/svc/method/svc-puppetd stop'
         timeout_seconds='60' />
 
     <exec_method
         type='method'
         name='refresh'
-        exec='/opt/csw/lib/svc/method/svc-puppetd reload'
+        exec='/opt/local/lib/svc/method/svc-puppetd reload'
         timeout_seconds='60' />
 
     <stability value='Unstable' />

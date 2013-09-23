@@ -7,10 +7,8 @@
 
 . /lib/svc/share/smf_include.sh
 
-prefix=/opt/csw
-exec_prefix=/opt/csw
-sysconfdir=/opt/csw/etc
-sbindir=/opt/csw/sbin
+prefix=/opt/local
+exec_prefix=${prefix}/bin
 
 pidfile=/var/lib/puppet/run/agent.pid
 
@@ -21,23 +19,23 @@ start)
 
     printf "Starting Puppet client services:"
 
-    /opt/csw/sbin/puppetd
+    ${exec_prefix}/puppet agent --daemonize
 
-    printf " puppetd"
+    printf " puppet agent"
     echo ""
     ;;
 stop)
     printf "Stopping Puppet client services:"
     kill `cat $pidfile`
 
-    printf " puppetd"
+    printf " puppet agent"
     echo ""
     ;;
 restart)
     printf "Restarting Puppet client services:"
     kill -HUP `cat $pidfile`
 
-    printf " puppetd"
+    printf " puppet agent"
     echo ""
     ;;
 reload)
@@ -45,13 +43,14 @@ reload)
 
     kill -HUP `cat $pidfile`
 
-    printf " puppetd"
+    printf " puppet agent"
     echo ""
     ;;
 status)
     if [ -f $pidfile ]; then
         pid=`cat $pidfile`
-        curpid=`pgrep puppetd`
+        curpid=`pgrep puppet`
+				curpid=`pgrep -f "ruby.*puppet\ agent"`
         if [ "$pid" -eq "$curpid" ]; then
             exit 0
         else

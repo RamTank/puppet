@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 #
 
 . /lib/svc/share/smf_include.sh
+. /etc/profile
 
-prefix=/opt/csw
-exec_prefix=/opt/csw
-sysconfdir=/opt/csw/etc
-sbindir=/opt/csw/sbin
+prefix=/opt/local
+exec_prefix=${prefix}/bin
+fullcat=/opt/local/bin/cat
 
 pidfile=/var/lib/puppet/run/master.pid
 
@@ -17,21 +17,21 @@ start)
 
     printf "Starting Puppet server services:"
 
-    /opt/csw/sbin/puppetmasterd
+    ${exec_prefix}/puppet master --daemonize 
 
-    printf " puppetmaster"
+    printf " puppet master"
     echo ""
     ;;
 stop)
     printf "Stopping Puppet server services:"
-    kill `cat $pidfile`
+    kill `$fullcat $pidfile`
 
     printf " puppetmasterd"
     echo ""
     ;;
 restart)
     printf "Restarting Puppet server services:"
-    kill -HUP `cat $pidfile`
+    kill -HUP `$fullcat $pidfile`
 
     printf " puppetmasterd"
     echo ""
@@ -39,15 +39,15 @@ restart)
 reload)
     printf "Reloading Puppet server services:"
 
-    kill -HUP `cat $pidfile`
+    kill -HUP `$fullcat $pidfile`
 
     printf " puppetmasterd"
     echo ""
     ;;
 status)
     if [ -f $pidfile ]; then
-        pid=`cat $pidfile`
-        curpid=`pgrep puppetmasterd`
+        pid=`$fullcat $pidfile`
+        curpid=`pgrep -f "ruby.*puppet\ master"`
         if [ "$pid" -eq "$curpid" ]; then
             exit 0
         else
